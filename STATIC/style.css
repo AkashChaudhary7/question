@@ -1,0 +1,338 @@
+/* Color Palette */
+:root {
+    --primary-color: #13B0E8; /* Vibrant Blue/Teal */
+    --accent-color: #FFC700;  /* Energetic Yellow */
+    --success-color: #4ADE80; /* Green for success */
+    --bg-light: #F8F9FA;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 12px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header/Footer Styling */
+.header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 15px 0;
+    box-shadow: var(--shadow-subtle);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    font-size: 0.9em;
+}
+
+/* Main Container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* --- Buttons and Status Boxes --- */
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-start {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    box-shadow: 0 6px 15px rgba(19, 176, 232, 0.4);
+    font-size: 1.5em;
+    padding: 20px 40px;
+}
+
+.btn-start:hover {
+    background-color: #00A9FF;
+    transform: translateY(-2px);
+}
+
+.btn-submit {
+    background-color: var(--success-color);
+    color: var(--text-dark);
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #43b865;
+    transform: translateY(-1px);
+}
+
+.btn-view {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    margin-left: 20px;
+}
+
+.btn-view-small {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+    background-color: #ddd;
+    color: var(--text-dark);
+}
+
+.btn-view-small:hover {
+    background-color: #ccc;
+}
+
+
+.status-box {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.generated {
+    background-color: #e0f7fa;
+    color: #00796b;
+    border: 2px solid var(--primary-color);
+}
+
+.rest {
+    background-color: #fff9e6;
+    color: #a37200;
+    border: 2px solid var(--accent-color);
+}
+
+.submitted {
+    background-color: #e6ffe6;
+    color: #219d2c;
+    border: 2px solid var(--success-color);
+}
+
+.status-box i {
+    margin-right: 10px;
+    font-size: 1.5em;
+}
+
+/* --- Homepage Specific --- */
+.home-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-subtle);
+}
+
+.welcome-heading {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #666;
+}
+
+.feature-list {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px dashed #ddd;
+}
+
+.daily-summary {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 1.1em;
+}
+
+.daily-summary li {
+    background-color: var(--bg-light);
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.icon-blue { color: var(--primary-color); }
+.icon-yellow { color: var(--accent-color); }
+
+/* --- Question Card Styling --- */
+.question-card {
+    background-color: #ffffff;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-subtle);
+    border-left: 5px solid var(--primary-color);
+}
+
+.question-card h3 {
+    color: var(--text-dark);
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.input-tip {
+    font-size: 0.9em;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+textarea, input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+textarea:focus, input[type="file"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(19, 176, 232, 0.3);
+}
+
+/* --- Record Menu Styling --- */
+.record-list {
+    list-style: none;
+    padding: 0;
+}
+
+.record-item {
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid var(--primary-color);
+}
+
+.record-date {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-right: 15px;
+}
+
+.tag {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.tag-answered {
+    background-color: #d1ffde;
+    color: #2e7d32;
+}
+
+.tag-unanswered {
+    background-color: #ffe0e0;
+    color: #c62828;
+}
+
+/* Record Detail View */
+.detail-card {
+    border-left: 5px solid var(--accent-color);
+    margin-bottom: 30px;
+}
+
+.question-text {
+    border-bottom: 2px dashed #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.answer-section {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.student-answer {
+    background-color: #e6f7ff; /* Light blue */
+    border-left: 4px solid var(--primary-color);
+}
+
+.correct-answer {
+    background-color: #fffde7; /* Light yellow */
+    border-left: 4px solid var(--accent-color);
+}
+
+.answer-section h4 {
+    margin-top: 0;
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
