@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Record Menu{% endblock %}
+
+{% block content %}
+<h1 class="section-title">📚 Assignment History</h1>
+<p class="section-subtitle">Access your previous questions and answers.</p>
+
+<ul class="record-list">
+    {% for log in logs %}
+    <li class="record-item">
+        <div>
+            <span class="record-date"><i class="fas fa-calendar-day"></i> **{{ log.date_given }}** ({{ log.day_of_week }})</span>
+            {% if log.is_answered %}
+                <span class="tag tag-answered"><i class="fas fa-check"></i> Answered</span>
+            {% else %}
+                <span class="tag tag-unanswered"><i class="fas fa-times"></i> Unanswered</span>
+            {% endif %}
+        </div>
+        <a href="{{ url_for('view_record', log_id=log.id) }}" class="btn btn-view-small">View Details <i class="fas fa-arrow-right"></i></a>
+    </li>
+    {% else %}
+    <li class="record-item no-records">
+        <i class="fas fa-box-open"></i> No assignments logged yet. Start today's homework!
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
