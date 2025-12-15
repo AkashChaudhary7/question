@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}View Record {{ log.date_given }}{% endblock %}
+
+{% block content %}
+<h1 class="section-title">Record: **{{ log.date_given }}** ({{ log.day_of_week }})</h1>
+<p class="section-subtitle">Type: {{ day_type }}</p>
+
+<div class="record-detail-container">
+    {% for question in questions %}
+        <div class="question-card detail-card">
+            <h3 class="question-text">Q{{ loop.index }}: {{ question.text }}</h3>
+            
+            <div class="answer-section student-answer">
+                <h4><i class="fas fa-user-edit icon-blue"></i> Your Submitted Answer:</h4>
+                <p>{{ question.submitted_answer if question.submitted_answer else 'No answer submitted.' }}</p>
+            </div>
+            
+            <div class="answer-section correct-answer">
+                <h4><i class="fas fa-lightbulb icon-yellow"></i> Correct Answer/Key Point:</h4>
+                <p>{{ question.correct_answer }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    <a href="{{ url_for('record_menu') }}" class="btn btn-view-small"><i class="fas fa-angle-left"></i> Back to Records</a>
+</div>
+
+{% endblock %}
