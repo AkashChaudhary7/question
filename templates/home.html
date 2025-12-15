@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome Home{% endblock %}
+
+{% block content %}
+<section class="home-section">
+    <h1 class="welcome-heading">Welcome, **{{ student_name }}**! 👋</h1>
+    <p class="tagline">Your personalized Class 9 Science questions for {{ day_name }} ({{ date_str }}) are ready.</p>
+    
+    {% if is_generated %}
+        <div class="status-box generated">
+            <i class="fas fa-check-circle"></i> Today's questions have been generated!
+            <a href="{{ url_for('view_todays_questions') }}" class="btn btn-view">View Today's Assignment</a>
+        </div>
+    {% else %}
+        {% if day_config.count > 0 %}
+            <form action="{{ url_for('generate_questions') }}" method="POST">
+                <button type="submit" class="btn btn-start">
+                    <i class="fas fa-rocket"></i> Start Today's Questions
+                </button>
+            </form>
+        {% else %}
+             <div class="status-box rest">
+                <i class="fas fa-mug-hot"></i> {{ day_name }} is a **Rest Day**! No assignment today.
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="feature-list">
+        <h2>Assignment Today</h2>
+        <ul class="daily-summary">
+            <li><i class="fas fa-calendar-alt icon-blue"></i> **Day Type:** {{ day_config.type }}</li>
+            <li><i class="fas fa-list-ol icon-yellow"></i> **Total Questions:** {{ day_config.count }}</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
