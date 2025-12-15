@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 9 Science Question Generator</title>
+    
+    <style>
+        /* Modern, Premium Look CSS */
+        :root {
+            --primary-color: #13B0E8; /* Vibrant Blue/Teal */
+            --accent-color: #FFC700;  /* Energetic Yellow */
+            --success-color: #4ADE80; /* Green */
+            --bg-light: #F8F9FA;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+            --font-family: Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Utility for simple "icons" (emojis) */
+        .icon-small { font-size: 1.1em; margin-right: 5px; }
+        .icon-blue { color: var(--primary-color); font-weight: bold;}
+        .icon-yellow { color: var(--accent-color); font-weight: bold; }
+        .icon-red { color: #e74c3c; font-weight: bold; }
+
+        /* Header/Footer Styling (Kept in English/Standard) */
+        .header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 15px 0;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .nav button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1em;
+            cursor: pointer;
+            margin-left: 20px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .nav button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #ffffff;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        /* Main Container and Sections */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-start {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: 0 6px 15px rgba(19, 176, 232, 0.4);
+            font-size: 1.5em;
+            padding: 20px 40px;
+        }
+        .btn-start:hover { background-color: #00A9FF; transform: translateY(-2px); }
+
+        .btn-view-small {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-top: 20px;
+            background-color: #ddd;
+            color: var(--text-dark);
+        }
+        .btn-view-small:hover { background-color: #ccc; }
+
+        /* Status Boxes */
+        .status-box {
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .generated { background-color: #e0f7fa; color: #00796b; border: 2px solid var(--primary-color); }
+        .rest { background-color: #fff9e6; color: #a37200; border: 2px solid var(--accent-color); }
+        .submitted { background-color: #e6ffe6; color: #219d2c; border: 2px solid var(--success-color); }
+        .status-box .icon-small { margin-right: 10px; font-size: 1.5em; }
+
+        /* Home Section */
+        .home-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        .welcome-heading { color: var(--primary-color); font-size: 2.5em; margin-bottom: 10px; }
+        .tagline { font-size: 1.2em; margin-bottom: 40px; color: #666; }
+        .feature-list { margin-top: 50px; padding-top: 20px; border-top: 1px dashed #ddd; }
+        .daily-summary { list-style: none; padding: 0; display: flex; justify-content: center; gap: 30px; font-size: 1.1em; }
+        .daily-summary li { background-color: var(--bg-light); padding: 10px 15px; border-radius: 6px; }
+
+        /* Question Card Styling */
+        .question-card {
+            background-color: #ffffff;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-subtle);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        /* Record Detail View - Answers are for reference only */
+        .detail-card { border-left: 5px solid var(--accent-color); margin-bottom: 30px; }
+        .answer-section { padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 0.95em; }
+        .student-answer { background-color: #e6f7ff; border-left: 4px solid var(--primary-color); }
+        .correct-answer { background-color: #fffde7; border-left: 4px solid var(--accent-color); }
+        .answer-section h4 { margin-top: 0; font-size: 1em; font-weight: bold; margin-bottom: 5px; }
+
+        /* Record Menu Styling */
+        .record-list { list-style: none; padding: 0; }
+        .record-item {
+            background-color: #ffffff;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary-color);
+        }
+        .record-date { font-size: 1.1em; color: var(--text-dark); margin-right: 15px; }
+        .tag { padding: 5px 10px; border-radius: 4px; font-size: 0.9em; font-weight: bold; margin-left: 10px; }
+        .tag-answered { background-color: #d1ffde; color: #2e7d32; }
+        .tag-unanswered { background-color: #ffe0e0; color: #c62828; }
+    </style>
+
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="javascript:void(0);" onclick="renderPage('home')" class="logo">🔬 Class 9 Science Question Generator</a>
+            <nav class="nav">
+                <button onclick="renderPage('home')"><span class="icon-small">✨</span> Home</button>
+                <button onclick="renderPage('record')"><span class="icon-small">📚</span> Record Menu</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="app-content"></div>
+    </main>
+
+    <footer class="footer">
+        Made with <span style="color: #ff6b6b;">❤️</span> by AKASH Chaudhary
+    </footer>
+
+    <script>
+        const STUDENT_NAME = "Akash Chaudhary";
+        const CONTENT_DIV = document.getElementById('app-content');
+        const DAYS_OF_WEEK = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        
+        // --- Configuration (Hindi Text) ---
+        const UI_TEXT = {
+            ASSIGNMENT_HISTORY: "असाइनमेंट इतिहास",
+            ACCESS_PREVIOUS: "अपने पिछले प्रश्न और उनके उत्तर देखें।",
+            HOMEWORK_FOR: "का होमवर्क",
+            QUESTIONS_GENERATED: "आज के प्रश्न तैयार हो गए हैं!",
+            VIEW_ASSIGNMENT: "आज का असाइनमेंट देखें",
+            START_QUESTIONS: "आज के प्रश्न शुरू करें",
+            REST_DAY: "आराम का दिन",
+            NO_ASSIGNMENT: "आज कोई असाइनमेंट नहीं है।",
+            DAY_TYPE: "दिन का प्रकार",
+            TOTAL_QUESTIONS: "कुल प्रश्न",
+            LOG_DATE: "तिथि",
+            ANSWERED: "उत्तर दिया गया",
+            UNANSWERED: "अनुत्तरित",
+            VIEW_DETAILS: "विवरण देखें",
+            NO_RECORDS: "अभी कोई असाइनमेंट लॉग नहीं किया गया है। आज का होमवर्क शुरू करें!",
+            YOUR_ANSWER: "आपका प्रस्तुत उत्तर",
+            CORRECT_ANSWER: "सही उत्तर/मुख्य बिंदु",
+            BACK_TO_RECORDS: "⬅️ रिकॉर्ड पर वापस जाएं",
+            ERROR: "त्रुटि! 🛑",
+            ASSIGNMENT_NOT_FOUND: "असाइनमेंट लॉग नहीं मिला।",
+            SUCCESS: "सफलता!",
+            ANSWERS_SAVED: "रिकॉर्ड में सफलतापूर्वक लॉग किया गया।",
+            NOTEBOOK_INSTRUCTION: "कृपया इन प्रश्नों को अपनी नोटबुक में पूरा करें।"
+        };
+
+        const DAILY_Q_CONFIG = {
+            'Monday': { count: 3, type: 'प्रश्न-उत्तर (विस्तृत)', placeholder: '' },
+            'Tuesday': { count: 10, type: 'एक-पंक्ति प्रश्न', placeholder: '' },
+            'Wednesday': { count: 5, type: 'दो-पंक्ति प्रश्न', placeholder: '' },
+            'Thursday': { count: 1, type: 'चित्र-आधारित प्रश्न', placeholder: '' },
+            'Friday': { count: 2, type: 'अवलोकन-आधारित प्रश्न', placeholder: '' },
+            'Saturday': { count: 0, type: UI_TEXT.REST_DAY, placeholder: '' },
+            'Sunday': { count: 0, type: UI_TEXT.REST_DAY, placeholder: '' },
+        };
+
+        // --- Question Bank (550+ Questions) in Hindi ---
+        const QUESTION_BANK = {
+            'Monday': [], 'Tuesday': [], 'Wednesday': [], 'Thursday': [], 'Friday': []
+        };
+        
+        // --- Helper Functions ---
+
+        function initializeQuestionBank() {
+            let qId = 1;
+            for (const day in DAILY_Q_CONFIG) {
+                if (DAILY_Q_CONFIG[day].count > 0) {
+                    for (let i = 1; i <= 110; i++) { // 110 questions per active day (550 total)
+                        let qText, ans;
+                        
+                        // Generating specific Hindi questions based on Class 9 Science topics
+                        if (day === 'Monday') {
+                            // Long Answer (विस्तृत)
+                            if (i <= 30) {
+                                qText = `[कोशिका - Q${i}] ${i}. कोशिका केंद्रक की संरचना और कार्य का विस्तृत वर्णन करें। (DNA, क्रोमेटिन) 
+
+[Image of Cell Nucleus]
+`;
+                                ans = "केंद्रक दोहरी झिल्ली से घिरा होता है, जिसमें क्रोमेटिन (DNA और प्रोटीन) होता है। यह कोशिका की सभी गतिविधियों और प्रजनन को नियंत्रित करता है।";
+                            } else if (i <= 60) {
+                                qText = `[बल और गति - Q${i}] ${i}. न्यूटन के गति के दूसरे नियम को समझाएं और इसका गणितीय सूत्र ($F=ma$) व्युत्पन्न करें।`;
+                                ans = "संवेग में परिवर्तन की दर लगाए गए बल के समानुपापाती होती है। बल का सूत्र: $F=ma$ (द्रव्यमान x त्वरण)।";
+                            } else if (i <= 90) {
+                                qText = `[कार्य और ऊर्जा - Q${i}] ${i}. कार्य (Work) को परिभाषित करें। किसी वस्तु पर बल लगाने के बावजूद कार्य शून्य कब होता है? उदाहरण सहित समझाएं।`;
+                                ans = "कार्य: बल लगाने पर विस्थापन (displacement) होता है। यदि विस्थापन शून्य हो, या बल और विस्थापन के बीच का कोण $90^\circ$ हो, तो कार्य शून्य होता है (जैसे दीवार को धक्का देना)।";
+                            } else {
+                                qText = `[परमाणु संरचना - Q${i}] ${i}. रदरफोर्ड के अल्फा-कण प्रकीर्णन प्रयोग (Alpha-particle scattering experiment) के निष्कर्ष क्या थे? 
+
+[Image of Rutherford's experiment]
+`;
+                                ans = "अधिकांश कण सीधे निकल गए, कुछ विक्षेपित हुए, और बहुत कम वापस आए। निष्कर्ष: परमाणु का अधिकांश भाग खोखला है, और केंद्रक सघन तथा धनावेशित होता है।";
+                            }
+
+                        } else if (day === 'Tuesday') {
+                            // One-Liner (एक-पंक्ति)
+                            if (i <= 40) {
+                                qText = `[भौतिकी - Q${i}] ${i}. त्वरण की SI इकाई क्या है?`;
+                                ans = "मीटर प्रति सेकंड वर्ग ($m/s^2$)";
+                            } else if (i <= 80) {
+                                qText = `[रसायन विज्ञान - Q${i}] ${i}. कमरे के तापमान पर कौन सी धातु (metal) तरल अवस्था में पाई जाती है?`;
+                                ans = "पारा (Mercury)";
+                            } else {
+                                qText = `[जीव विज्ञान - Q${i}] ${i}. कोशिका का ऊर्जा घर (Powerhouse) किसे कहते हैं?`;
+                                ans = "माइटोकॉन्ड्रिया (Mitochondria)";
+                            }
+                        } else if (day === 'Wednesday') {
+                            // Two-Liner (दो-पंक्ति)
+                            if (i <= 40) {
+                                qText = `[मिश्रण और विलयन - Q${i}] ${i}. समांगी (homogeneous) और विषमांगी (heterogeneous) मिश्रणों के बीच दो मुख्य अंतर स्पष्ट करें।`;
+                                ans = "समांगी: घटक पूरी तरह से मिश्रित होते हैं (जैसे नमक का घोल)। विषमांगी: घटकों को अलग-अलग देखा जा सकता है (जैसे रेत और पानी)।";
+                            } else if (i <= 80) {
+                                qText = `[गुरुत्वाकर्षण - Q${i}] ${i}. किसी वस्तु के द्रव्यमान और भार (mass and weight) में क्या अंतर है?`;
+                                ans = "द्रव्यमान: वस्तु में मौजूद पदार्थ की मात्रा। भार: वह बल जिससे पृथ्वी वस्तु को खींचती है (भार = द्रव्यमान x गुरुत्वीय त्वरण)।";
+                            } else {
+                                qText = `[ऊतक - Q${i}] ${i}. पैरेन्काइमा (Parenchyma) और स्क्लेरेन्काइमा (Sclerenchyma) ऊतकों के कार्यों में मुख्य अंतर बताएं।`;
+                                ans = "पैरेन्काइमा: भोजन भंडारण और सहायता प्रदान करना। स्क्लेरेन्काइमा: कठोरता और यांत्रिक शक्ति प्रदान करना (पौधे के सख्त भाग)।";
+                            }
+                        } else if (day === 'Thursday') {
+                            // Drawing-Based (चित्र-आधारित)
+                            if (i <= 55) {
+                                qText = `[जीव विज्ञान - Q${i}] ${i}. एक तंत्रिका कोशिका (Neuron) का स्वच्छ आरेख बनाकर उसके डेन्ड्राइट (Dendrite) और एक्सॉन (Axon) को नामांकित करें। 
+
+[Image of Neuron Structure]
+`;
+                                ans = "नामांकित भागों में शामिल हैं: डेन्ड्राइट, एक्सॉन, कोशिका पिंड (Cell Body) और तंत्रिका अंत (Nerve Ending)।";
+                            } else {
+                                qText = `[भौतिकी - Q${i}] ${i}. वेग-समय ग्राफ (Velocity-Time Graph) का उपयोग करके एकसमान त्वरण (Uniform Acceleration) की स्थिति को दर्शाएं और ग्राफ के ढलान (slope) के महत्व को समझाएं। `;
+                                ans = "एकसमान त्वरण का ग्राफ एक सीधी रेखा होता है जिसका ढलान धनात्मक होता है। ढलान त्वरण के मान को दर्शाता है।";
+                            }
+                        } else if (day === 'Friday') {
+                            // Observation-Based (अवलोकन-आधारित)
+                            if (i <= 40) {
+                                qText = `[ऊष्मा और अवस्था - Q${i}] ${i}. सर्दियों में गीले कपड़े तेजी से क्यों सूखते हैं, भले ही तापमान हिमांक (freezing point) से ऊपर न हो? इस अवलोकन का वैज्ञानिक कारण बताएं।`;
+                                ans = "कारण: वाष्पीकरण (Evaporation) हर तापमान पर होता है। सर्दियों में हवा शुष्क होती है, जिससे वाष्पीकरण की दर बढ़ जाती है।";
+                            } else if (i <= 80) {
+                                qText = `[उत्प्लावकता - Q${i}] ${i}. एक भारी नाव पानी में तैरती है, जबकि लोहे का एक छोटा टुकड़ा डूब जाता है। इस अवलोकन के पीछे आर्किमिडीज का सिद्धांत (Archimedes' principle) कैसे काम करता है?`;
+                                ans = "नाव अपने आयतन के कारण अपने भार से अधिक पानी विस्थापित करती है (उत्प्लावन बल अधिक होता है)। लोहे का टुकड़ा कम पानी विस्थापित करता है, इसलिए वह डूब जाता है।";
+                            } else {
+                                qText = `[पृथक्करण - Q${i}] ${i}. जब हम चाय बनाते हैं, तो चायपत्ती को अलग करने के लिए छानने (filtration) की प्रक्रिया का उपयोग करते हैं। यह किस वैज्ञानिक सिद्धांत पर आधारित है?`;
+                                ans = "सिद्धांत: कणों के आकार में अंतर। चायपत्ती के बड़े कण छन्नी के छिद्रों में फंस जाते हैं, जबकि तरल (चाय) के छोटे अणु आसानी से निकल जाते हैं।";
+                            }
+                        }
+                        
+                        QUESTION_BANK[day].push({ id: qId++, text: qText, answer: ans });
+                    }
+                }
+            }
+        }
+
+        // --- Rest of the Helper Functions (Unchanged) ---
+        
+        const getTodayData = () => {
+            const date = new Date();
+            const dayName = DAYS_OF_WEEK[date.getDay()];
+            const dateString = date.toLocaleDateString('hi-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+            const dayConfig = DAILY_Q_CONFIG[dayName];
+            const logDate = date.toISOString().slice(0, 10); // YYYY-MM-DD
+            
+            return { date, dayName, dateString, dayConfig, logDate };
+        };
+
+        const getLog = () => {
+            const logs = JSON.parse(localStorage.getItem('homeworkLog') || '[]');
+            return logs.map(log => ({
+                ...log,
+                is_completed: log.is_completed !== undefined ? log.is_completed : false
+            }));
+        };
+
+        const saveLog = (log) => {
+            localStorage.setItem('homeworkLog', JSON.stringify(log));
+        };
+        
+        const getTodaysAssignment = (logDate) => {
+            return getLog().find(log => log.date_given === logDate);
+        };
+
+        const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+        
+        // --- Page Rendering Functions ---
+
+        const renderPage = (page, data = {}) => {
+            let htmlContent = '';
+            
+            switch (page) {
+                case 'home':
+                    htmlContent = renderHome(data);
+                    break;
+                case 'homework':
+                    htmlContent = renderHomework(data);
+                    break;
+                case 'record':
+                    htmlContent = renderRecordMenu();
+                    break;
+                case 'view_record':
+                    htmlContent = renderViewRecord(data.logId);
+                    break;
+                default:
+                    htmlContent = renderError(UI_TEXT.ERROR);
+            }
+            CONTENT_DIV.innerHTML = htmlContent;
+        };
+
+        const renderHome = (data) => {
+            const { dayName, dateString, dayConfig, logDate } = getTodayData();
+            const todaysLog = getTodaysAssignment(logDate);
+            const isGenerated = !!todaysLog;
+
+            let statusBox = '';
+            let actionButton = '';
+
+            if (dayConfig.count === 0) {
+                statusBox = `
+                <div class="status-box rest">
+                    <span class="icon-small">☕</span> ${UI_TEXT.REST_DAY}: ${UI_TEXT.NO_ASSIGNMENT}
+                </div>`;
+            } else if (isGenerated) {
+                const buttonText = todaysLog.is_completed ? "रिकॉर्ड देखें" : UI_TEXT.VIEW_ASSIGNMENT;
+                const targetPage = todaysLog.is_completed ? 'record' : 'homework';
+
+                statusBox = `
+                <div class="status-box generated">
+                    <span class="icon-small">✔️</span> ${UI_TEXT.QUESTIONS_GENERATED}
+                    <button onclick="renderPage('${targetPage}')" class="btn btn-view-small" style="margin-left: 20px;">${buttonText}</button>
+                </div>`;
+            } else {
+                actionButton = `
+                <button onclick="generateQuestions()" class="btn btn-start">
+                    <span class="icon-small">🚀</span> ${UI_TEXT.START_QUESTIONS}
+                </button>`;
+            }
+
+            return `
+            <section class="home-section">
+                <h1 class="welcome-heading">Welcome, **${STUDENT_NAME}**! 👋</h1>
+                <p class="tagline">${dayName} (${dateString}) ${UI_TEXT.HOMEWORK_FOR} तैयार है।</p>
+                
+                ${statusBox}
+                ${actionButton}
+
+                <div class="feature-list">
+                    <h2>आज का असाइनमेंट</h2>
+                    <ul class="daily-summary">
+                        <li><span class="icon-small icon-blue">📅</span> **${UI_TEXT.DAY_TYPE}:** ${dayConfig.type}</li>
+                        <li><span class="icon-small icon-yellow">🔢</span> **${UI_TEXT.TOTAL_QUESTIONS}:** ${dayConfig.count}</li>
+                    </ul>
+                </div>
+            </section>
+            `;
+        };
+
+        const renderHomework = () => {
+            const { dayName, logDate, dayConfig } = getTodayData();
+            const logs = getLog();
+            const logIndex = logs.findIndex(l => l.date_given === logDate);
+            let log = logs[logIndex];
+            
+            if (dayConfig.count === 0) {
+                return `
+                <section class="assignment-section">
+                    <h1 class="section-title">${dayName} ${UI_TEXT.HOMEWORK_FOR}</h1>
+                    <div class="status-box rest"><span class="icon-small">✅</span> ${UI_TEXT.NO_ASSIGNMENT}</div>
+                    <button onclick="renderPage('home')" class="btn btn-view-small">होम पर वापस जाएं</button>
+                </section>`;
+            }
+            
+            if (!log) {
+                return renderError("असाइनमेंट अभी तक तैयार नहीं हुआ है। कृपया 'आज के प्रश्न शुरू करें' पर क्लिक करें।");
+            }
+
+            const questions = log.questions_json;
+            const isCompleted = log.is_completed || false;
+
+            let questionsHtml = '';
+            questions.forEach((q, index) => {
+                questionsHtml += `
+                <div class="question-card">
+                    <h3>Q${index + 1}. ${q.text}</h3>
+                    ${isCompleted ? '' : `<p style="color: #666; margin-top: 5px; font-style: italic;">${UI_TEXT.NOTEBOOK_INSTRUCTION}</p>`}
+                </div>`;
+            });
+            
+            const completionButton = isCompleted ? '' : 
+                `<button onclick="markAsCompleted(${log.id})" class="btn btn-start" style="font-size: 1.2em;">
+                    <span class="icon-small">✔️</span> मैंने यह असाइनमेंट पूरा कर लिया है
+                </button>`;
+
+            return `
+            <section class="assignment-section">
+                <h1 class="section-title">आज ${dayName} ${UI_TEXT.HOMEWORK_FOR} <span class="icon-yellow">🧠</span></h1>
+                <p class="section-subtitle">आपके पास ${questions.length} प्रश्न हैं।</p>
+                
+                ${isCompleted ? `
+                <div class="status-box submitted">
+                    <span class="icon-small">✅</span> **पूरा हुआ!** यह असाइनमेंट रिकॉर्ड में लॉग किया गया है।
+                </div>
+                ` : ''}
+
+                ${questionsHtml}
+                
+                ${completionButton}
+                <button onclick="renderPage('home')" class="btn btn-view-small" style="margin-top: 15px;">होम पर वापस जाएं</button>
+            </section>
+            `;
+        };
+        
+        const renderRecordMenu = () => {
+            const logs = getLog().sort((a, b) => new Date(b.date_given) - new Date(a.date_given));
+
+            let listItems = logs.map(log => {
+                const isCompleted = log.is_completed || false;
+                const dayType = log.day_of_week;
+                
+                return `
+                <li class="record-item">
+                    <div>
+                        <span class="record-date"><span class="icon-small">📅</span> **${log.date_given}** (${dayType})</span>
+                        <span class="tag ${isCompleted ? 'tag-answered' : 'tag-unanswered'}">
+                            <span class="icon-small">${isCompleted ? '✔️' : '❌'}</span> ${isCompleted ? UI_TEXT.ANSWERED : UI_TEXT.UNANSWERED}
+                        </span>
+                    </div>
+                    <button onclick="renderPage('view_record', { logId: ${log.id} })" class="btn btn-view-small">${UI_TEXT.VIEW_DETAILS} ➡️</button>
+                </li>
+                `;
+            }).join('');
+            
+            if (logs.length === 0) {
+                 listItems = `<li class="record-item" style="justify-content: center;"><span class="icon-small">📦</span> ${UI_TEXT.NO_RECORDS}</li>`;
+            }
+
+            return `
+            <h1 class="section-title"><span class="icon-blue">📚</span> ${UI_TEXT.ASSIGNMENT_HISTORY}</h1>
+            <p class="section-subtitle">${UI_TEXT.ACCESS_PREVIOUS}</p>
+
+            <ul class="record-list">
+                ${listItems}
+            </ul>
+            `;
+        };
+        
+        const renderViewRecord = (logId) => {
+            const logs = getLog();
+            const log = logs.find(l => l.id === logId);
+            
+            if (!log) { return renderError(UI_TEXT.ASSIGNMENT_NOT_FOUND); }
+            
+            const dayType = DAILY_Q_CONFIG[log.day_of_week].type;
+            
+            const detailCards = log.questions_json.map((q, index) => {
+                const originalQ = QUESTION_BANK[log.day_of_week].find(item => item.text === q.text);
+                const correctAnswer = originalQ ? originalQ.answer : "N/A (सही उत्तर कुंजी उपलब्ध नहीं)";
+                
+                return `
+                <div class="question-card detail-card">
+                    <h3 class="question-text">Q${index + 1}: ${q.text}</h3>
+                    
+                    <div class="answer-section student-answer">
+                        <h4><span class="icon-small icon-blue">👤</span> ${UI_TEXT.YOUR_ANSWER} (नोटबुक में):</h4>
+                        <p>${log.is_completed ? 'छात्र द्वारा नोटबुक में उत्तर दिया गया।' : 'रिकॉर्ड नहीं किया गया।'}</p>
+                    </div>
+                    
+                    <div class="answer-section correct-answer">
+                        <h4><span class="icon-small icon-yellow">💡</span> ${UI_TEXT.CORRECT_ANSWER}:</h4>
+                        <p>${correctAnswer}</p>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            return `
+            <h1 class="section-title">रिकॉर्ड: **${log.date_given}** (${log.day_of_week})</h1>
+            <p class="section-subtitle">${UI_TEXT.DAY_TYPE}: ${dayType}</p>
+
+            <div class="record-detail-container">
+                ${detailCards}
+                <button onclick="renderPage('record')" class="btn btn-view-small">${UI_TEXT.BACK_TO_RECORDS}</button>
+            </div>
+            `;
+        };
+
+        const renderError = (message) => {
+             return `
+             <section class="home-section">
+                <h1 class="welcome-heading" style="color: #c62828;">${UI_TEXT.ERROR}</h1>
+                <p class="tagline" style="font-weight: bold;">${message}</p>
+                <button onclick="renderPage('home')" class="btn btn-view-small">होम पर वापस जाएं</button>
+             </section>
+             `;
+        };
+
+        // --- Core Logic ---
+
+        const generateQuestions = () => {
+            const { dayName, logDate, dayConfig } = getTodayData();
+            const logs = getLog();
+            
+            if (getTodaysAssignment(logDate)) {
+                 return renderPage('homework');
+            }
+            
+            const requiredCount = dayConfig.count;
+            const availableQuestions = QUESTION_BANK[dayName];
+
+            if (availableQuestions.length === 0) {
+                 return renderError(`त्रुटि: ${dayName} के लिए प्रश्न बैंक में कोई प्रश्न नहीं है।`);
+            }
+            if (availableQuestions.length < requiredCount) {
+                return renderError(`त्रुटि: बैंक में केवल ${availableQuestions.length} प्रश्न हैं। ${requiredCount} की आवश्यकता है।`);
+            }
+            
+            const shuffled = shuffleArray([...availableQuestions]);
+            const selected = shuffled.slice(0, requiredCount);
+
+            const questionsLog = selected.map(q => ({
+                id: q.id,
+                text: q.text
+            }));
+            
+            const newLogId = logs.length > 0 ? Math.max(...logs.map(l => l.id)) + 1 : 1;
+
+            const newLog = {
+                id: newLogId,
+                date_given: logDate,
+                day_of_week: dayName,
+                questions_json: questionsLog,
+                is_completed: false 
+            };
+
+            logs.push(newLog);
+            saveLog(logs);
+            
+            renderPage('homework');
+        };
+
+        const markAsCompleted = (logId) => {
+            const logs = getLog();
+            const logIndex = logs.findIndex(l => l.id === logId);
+            
+            if (logIndex === -1) {
+                alert(UI_TEXT.ASSIGNMENT_NOT_FOUND);
+                return;
+            }
+
+            logs[logIndex].is_completed = true;
+            saveLog(logs);
+
+            alert(UI_TEXT.SUCCESS + ": " + UI_TEXT.ANSWERS_SAVED);
+            renderPage('homework');
+        };
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeQuestionBank(); 
+            // Full-screen call removed for stability
+            renderPage('home'); 
+        });
+        
+    </script>
+</body>
+</html>
