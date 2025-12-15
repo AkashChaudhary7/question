@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Today's Homework{% endblock %}
+
+{% block content %}
+<section class="assignment-section">
+    {% if message %}
+        <h1 class="section-title">Assignment for {{ day_name }}</h1>
+        <div class="status-box rest">
+             <i class="fas fa-check"></i> {{ message }}
+        </div>
+        <a href="{{ url_for('home') }}" class="btn btn-view-small">Go Back Home</a>
+    {% else %}
+        <h1 class="section-title">Assignment for **{{ day_name }}** <i class="fas fa-brain icon-yellow"></i></h1>
+        <p class="section-subtitle">You have {{ questions|length }} questions. Good luck!</p>
+
+        {% if is_submitted %}
+            <div class="status-box submitted">
+                <i class="fas fa-archive"></i> **Answers Submitted!** You can check your response in the Record Menu.
+            </div>
+            <a href="{{ url_for('record_menu') }}" class="btn btn-view-small">Go to Records</a>
+        {% else %}
+            <form action="{{ url_for('submit_answers', log_id=log_id) }}" method="POST" enctype="multipart/form-data">
+                {% for question in questions %}
+                    <div class="question-card">
+                        <h3>Q{{ loop.index }}. {{ question.text }}</h3>
+                        
+                        {% if input_type == 'file' %}
+                            <p class="input-tip"><i class="fas fa-upload"></i> **Required Input:** Upload your diagram/document (or type description below).</p>
+                            <input type="file" name="file" accept="image/*, .pdf">
+                            <textarea name="answer_{{ loop.index }}" rows="2" placeholder="{{ placeholder }}"></textarea>
+                        {% else %}
+                            <textarea name="answer_{{ loop.index }}" rows="5" placeholder="{{ placeholder }}" required></textarea>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-submit"><i class="fas fa-paper-plane"></i> Submit Answers</button>
+            </form>
+        {% endif %}
+    {% endif %}
+</section>
+{% endblock %}
